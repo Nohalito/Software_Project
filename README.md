@@ -8,3 +8,26 @@ This is our group project of the Softwares class from our M2 EDS track
 - <a href = 'https://www.over.gg/stats'>Overwatch</a>
 - <a href = ''></a>
 - <a href = ''></a>
+
+## Our project template
+
+```
+Softwares_Project/
+├── .gitignore
+├── README.md
+├── config.py
+├── project_M2_software_2025-2026.pdf
+├── repo_tree.ipynb
+├── requirements.txt
+├── app
+│   └── streamlit_app.py
+├── datasets
+│   ├── processed
+│   └── raw
+├── hazard_zone_(test)
+│   └── data_collection.ipynb
+├── notebooks
+│   └── super_awesome_EDA.ipynb
+└── src
+    └── prepare_data.py
+```
