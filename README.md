@@ -7,7 +7,6 @@ This is our group project of the Softwares class from our M2 EDS track
 - <a href = 'https://www.hltv.org/stats/players'>CSGO</a>
 - <a href = 'https://www.over.gg/stats'>Overwatch</a>
 - <a href = ''></a>
-- <a href = ''></a>
 
 ## Our project template
 
@@ -16,18 +15,18 @@ Softwares_Project/
 ├── .gitignore
 ├── README.md
 ├── config.py
-├── project_M2_software_2025-2026.pdf
-├── repo_tree.ipynb
-├── requirements.txt
+├── project_M2_software_2025-2026.pdf # Project instruction
+├── repo_tree.ipynb # quick function to print this tree
+├── requirements.txt # Libraries to install
 ├── app
-│   └── streamlit_app.py
+│   └── streamlit_app.py # Our main app
 ├── datasets
 │   ├── processed
 │   └── raw
 ├── hazard_zone_(test)
-│   └── data_collection.ipynb
+│   └── data_collection.ipynb # Oppenheimer playground
 ├── notebooks
 │   └── super_awesome_EDA.ipynb
-└── src
+└── src # All of our functions
     └── prepare_data.py
 ```
