@@ -1,17 +1,17 @@
 # Base import
-from datetime import datetime
+#from datetime import datetime
 import pandas as pd
 #import numpy as np
 
 #Repo management
 import os
-import shutil
+#import shutil
 import sys
-sys.path.append('..')
-# sys.path.append('../datasets')
+sys.path.append('.')
+sys.path.append('./datasets')
 # sys.path.append('../notebooks')
 
-from Softwares_Project import config as c
+import config as c
 
 def download_data(annee_debut:int ,annee_fin:int):
     """
@@ -25,28 +25,19 @@ def download_data(annee_debut:int ,annee_fin:int):
 
         url = f'https://www.basketball-reference.com/leagues/NBA_{i}_per_game.html'
 
-        df_temp = pd.read_html(url, header = 0)[0] # This request output a list of dataframe read from the url, let's select the correct one : r[0] => Regular Season /// r[1] => playoffs
-        df_temp['Year'] = i #adding the corresponding year
+        df_temp = pd.read_html(url, header = 0)[0]
+        # Add the corresponding year
+        df_temp['Year'] = i
 
-        # The last rows contains average of all players => useless
-        # df.loc[df['Rk'].isna()] => return an empty row
         df_temp = df_temp.drop(df_temp.tail(1).index)
 
-        # The columns G and GS are float, even though all number are int
-        # df.dtypes
         try:
             df_temp['G'] = df_temp['G'].astype('int32')
             df_temp['GS'] = df_temp['GS'].astype('int32')
-            print("toutes les colonnes ont été converties.")
-        except KeyError, pd.errors.IntCastingNaNError:
+            # print("toutes les colonnes ont été converties.")
+        except (KeyError, pd.errors.IntCastingNaNError):
             print("Certaines colonnes n'existent pas, le reste a été converti.")
 
-        # Truth be told, the NaN
-        # So let's just set them up to 0, the ranking argument is the points scored 'PTS', so it shouldn't be a problem for our futur uses. 
-        # missing.index => ctrl + c & ctrl + v
-        # df[['FG%', '3P%', '2P%', 'eFG%', 'FT%']] = df[['FG%', '3P%', '2P%', 'eFG%', 'FT%']].fillna(0.0)
-        # that's what we would have done if we didn't read the data, but anyways the only missing % is when it's equal to 0.0 so it's also working in theory
-        #for some other years, others informations are missing, there is the filling part for every possible blank
         def calc_percentage (numerator:str,denominator:str):
             """
             The most basic division possible, rounding the result 3 number after the decimal
@@ -64,29 +55,25 @@ def download_data(annee_debut:int ,annee_fin:int):
         for key,values in transfo.items():
             try:
                 df_temp[key] = df_temp[key].fillna(values)
-                print(f"La colonne {key} a été remplie avec succès.")
+                #print(f"La colonne {key} a été remplie avec succès.")
             except KeyError:
                 print(f"La colonne {key} n'existe pas sur cette année là.")
 
         #special treatment for eFG%:
-        df_temp['eFG%'] = round(((df_temp['PTS']-df_temp['FT'])/2)/df_temp['FGA'],3).fillna(0) #bc i cannot find how the calcul was made on the website so i use mine, the fillna(0) is for same reason as before
+        #bc I can't find how the calcul was made on the website so i use mine, the fillna(0) is for same reason as before
+        df_temp['eFG%'] = round(((df_temp['PTS']-df_temp['FT'])/2)/df_temp['FGA'],3).fillna(0)
 
+        df = pd.concat([df,df_temp], ignore_index = True) #ajoute la nouvelle année traitée
+        print(f"{i} : {len(df)}")
 
-        pd.concat([df,df_temp], ignore_index = True) #ajoute la nouvelle année traitée
-        print(i, ' : ',len(df))
-
-
-
-    if os.path.exists(os.path.join(c.PROCESSED_DATA_PATH, c.PER_GAME_DF_FILENAME)): #supprime le csv s'il existe déjà
-        shutil.rmtree(os.path.join(c.PROCESSED_DATA_PATH, c.PER_GAME_DF_FILENAME))
-    elif os.path.exists(c.PROCESSED_DATA_PATH) is False: #créé le fichier
+    # remove the csv file if it already exist
+    if os.path.exists(os.path.join(c.PROCESSED_DATA_PATH, c.PER_GAME_DF_FILENAME)):
+        os.remove(os.path.join(c.PROCESSED_DATA_PATH, c.PER_GAME_DF_FILENAME))
+    # Create the folder if it doesn't exist
+    elif os.path.exists(c.PROCESSED_DATA_PATH) is False:
         os.makedirs(c.PROCESSED_DATA_PATH)
-    df.to_csv(c.PROCESSED_DATA_PATH + c.PER_GAME_DF_FILENAME) #je suis pas sur de celle là j'ai essayé la docu de https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_csv.html
     
-
-
-
-
+    df.to_csv(os.path.join(c.PROCESSED_DATA_PATH, c.PER_GAME_DF_FILENAME)) #je suis pas sur de celle là j'ai essayé la docu de https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_csv.html
 
 
 if __name__ == "__main__":

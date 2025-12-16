@@ -10,7 +10,7 @@ DATA_URL = 'https://www.basketball-reference.com/leagues/NBA_{}_per_game.html'
 START_YEAR = 2015 #1947 début BBA, 1950 début NBA, à partir de 1980 on a plus de colonnes, et 1982 pour que les colonnes soient remplies bien 
 END_YEAR = datetime.today().year #mdr fait gaffe si tu prends un erreur trop large on a une erreur "trop de requetes"
 
-PER_GAME_DF_FILENAME = f"stat_player_per_game_each_year_from_{START_YEAR}_to_{END_YEAR}.csv"
+PER_GAME_DF_FILENAME = f"player_stats_{START_YEAR}-{END_YEAR}.csv"
 
 
 # Need to do the same for our future df 
