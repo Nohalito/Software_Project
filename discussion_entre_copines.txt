@@ -1,0 +1,22 @@
+trucs à faire:
+
+- readme
+    - en tout premier expliquer quel fichier lancer pour lancer l'appli
+    - "Inside the README.md file, you must provide a link to a public Git repository containing all the source code, Dockerfile, compose.yaml, requirements.txt, and any other necessary files to run the project."
+    - présentation du dataset et du site
+    - présentation de l'arborescence puis à quoi sert chaque fichier
+- rawdata et processed data
+    - If your data have a size greater than 4-5 Mo, do not include the data files in the repository and provide scripts to download and preprocess the data.
+- src.py
+    - dl_raw.py
+    - dl_processed.py
+    - funct.py (mon f(x) lol)
+- config.py
+- requierments.txt
+- deux notebooks: un pr cam et un pr noa
+- streamlit
+- dockerfile
+- .env?
+
+
+ah oui j'ai caché unlien pornhub au fait (y'en a qu'un seul pour l'instant)
