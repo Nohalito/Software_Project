@@ -1,5 +1,6 @@
 # If datasets too large => uncomment datasets/
-datasets/
+#datasets/processed/*
+datasets/raw/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

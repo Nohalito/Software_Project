@@ -1,16 +1,12 @@
 # Base import
-#from datetime import datetime
 import pandas as pd
-#import numpy as np
 
 #Repo management
 import os
-#import shutil
 import sys
 sys.path.append('.')
-sys.path.append('./datasets')
-# sys.path.append('../notebooks')
 
+# Custom library
 import config as c
 
 def download_data(annee_debut:int ,annee_fin:int):
@@ -73,7 +69,7 @@ def download_data(annee_debut:int ,annee_fin:int):
     elif os.path.exists(c.PROCESSED_DATA_PATH) is False:
         os.makedirs(c.PROCESSED_DATA_PATH)
     
-    df.to_csv(os.path.join(c.PROCESSED_DATA_PATH, c.PER_GAME_DF_FILENAME)) #je suis pas sur de celle là j'ai essayé la docu de https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_csv.html
+    df.to_csv(os.path.join(c.PROCESSED_DATA_PATH, c.PER_GAME_DF_FILENAME), index = False) #je suis pas sur de celle là j'ai essayé la docu de https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_csv.html
 
 
 if __name__ == "__main__":
