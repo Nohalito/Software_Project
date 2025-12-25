@@ -21,9 +21,6 @@ import function as f
 if not os.path.exists(c.DATA_DIR):
     download_data()
 
-# Dataset :
-df = f.load_data()
-
 # Roses are red
 # Streamlit is lit
 # With this treasure I summon
@@ -31,36 +28,46 @@ df = f.load_data()
 #st.title("NBA Player statistics 🏀")
 
 # ----------------------------
-# Page config
+# => Page config
 # ----------------------------
 st.set_page_config(
-    page_title="NBA Player Explorer",
+    page_title="🏀 NBA Player Explorer",
     layout="wide",
 )
 
 st.title("🏀 NBA Player Explorer")
 
-# ----------------------------
-# Load data
-# ----------------------------
-# df = pd.read_csv("your_data.csv")
-# Assumes df already exists
-
-# Ensure proper sorting
+# Dataset :
+df = f.load_data()
 df = df.sort_values(["Player", "Year"])
 
-# ----------------------------
-# Sidebar filters
-# ----------------------------
+# ----------------------------------------
+# => Sidebar filters :
+# 1°/ Select a player
+# 2°/ Select a year he played
+# 3°/ Select a team he played in (optional)
+# ----------------------------------------
 st.sidebar.header("Filter Player")
 
+# 1°/ Search bar + scrolling list :
+# 1st the user tingle with the search bar :
+search_term = st.sidebar.text_input("Search Player")
+
+# 2nd we filter the player list based on the search term
+if search_term:
+    filtered_players = [player for player in df["Player"].unique() if search_term.lower() in player.lower()]
+else:
+    filtered_players = sorted(df["Player"].unique())
+
+# 3rd we show the updated list of player corresponding to the term
 player = st.sidebar.selectbox(
     "Select Player",
-    sorted(df["Player"].unique())
+    filtered_players
 )
 
 player_df = df[df["Player"] == player]
 
+# 2°/ Scrolling list for season
 season = st.sidebar.selectbox(
     "Select Season",
     player_df["Year"].unique()
@@ -69,7 +76,7 @@ season = st.sidebar.selectbox(
 season_df = player_df[player_df["Year"] == season].iloc[0]
 
 # ----------------------------
-# Player Header
+# => Player Header
 # ----------------------------
 st.subheader(f"{player} — {season}")
 st.caption(
@@ -77,7 +84,7 @@ st.caption(
 )
 
 # ----------------------------
-# Key Metrics
+# => Key Metrics
 # ----------------------------
 col1, col2, col3, col4, col5 = st.columns(5)
 
@@ -88,7 +95,7 @@ col4.metric("MP", f"{season_df['MP']:.1f}")
 col5.metric("G", int(season_df["G"]))
 
 # ----------------------------
-# Shooting Efficiency
+# => Shooting Efficiency
 # ----------------------------
 st.markdown("### 🎯 Shooting Efficiency")
 
@@ -113,10 +120,10 @@ fig_shooting = px.bar(
 fig_shooting.update_traces(texttemplate="%{text:.1f}%", textposition="outside")
 fig_shooting.update_layout(yaxis_title="%", showlegend=False)
 
-st.plotly_chart(fig_shooting)#, use_container_width=True)
+st.plotly_chart(fig_shooting)
 
 # ----------------------------
-# Season Trends
+# => Season Trends
 # ----------------------------
 st.markdown("### 📈 Career Trends")
 
@@ -132,10 +139,10 @@ fig_trend = px.line(
     markers=True,
 )
 
-st.plotly_chart(fig_trend)#, use_container_width=True)
+st.plotly_chart(fig_trend)
 
 # ----------------------------
-# Advanced Stats Table
+# => Advanced Stats Table
 # ----------------------------
 st.markdown("### 📊 Season Breakdown")
 
@@ -151,12 +158,11 @@ st.dataframe(
         "FG%": "{:.3f}",
         "3P%": "{:.3f}",
         "FT%": "{:.3f}",
-    })#,
-    #use_container_width=True
+    })
 )
 
 # ----------------------------
-# Awards
+# => Awards
 # ----------------------------
 if isinstance(season_df["Awards"], str) and season_df["Awards"].strip():
     st.success(f"🏆 Awards: {season_df['Awards']}")

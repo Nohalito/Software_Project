@@ -8,27 +8,33 @@ Made by Boimond Nhoha and Maffre Cacamille
 - <a href = 'https://www.basketball-reference.com/leagues/NBA_2024_per_game.html'>Basketball</a> => shout out to this guy : <a href = 'https://github.com/Andy-Pham-72/Web-Scraping-with-BeautifulSoup-and-Pandas/tree/master'>Andy-Pham-72</a>
 - <a href = 'https://www.hltv.org/stats/players'>CSGO</a>
 - <a href = 'https://www.over.gg/stats'>Overwatch</a>
-- <a href = ''></a>
 
 ## Our project template
 
 ```
 Softwares_Project/
 ├── .gitignore
+├── Dockerfile
 ├── README.md
 ├── config.py
-├── project_M2_software_2025-2026.pdf # Project instruction
-├── repo_tree.ipynb # quick function to print this tree
-├── requirements.txt # Libraries to install
+├── discussion_entre_copines.txt
+├── project_M2_software_2025-2026.pdf
+├── repo_tree.ipynb
+├── requirements.txt
 ├── app
-│   └── streamlit_app.py # Our main app
+│   └── streamlit_app.py
 ├── datasets
 │   ├── processed
+│   │   └── player_stats_2015-2025.csv
 │   └── raw
 ├── hazard_zone_(test)
-│   └── data_collection.ipynb # Oppenheimer playground
+│   ├── app_test.ipynb
+│   └── data_collection.ipynb
 ├── notebooks
 │   └── super_awesome_EDA.ipynb
-└── src # All of our functions
-    └── prepare_data.py
+└── src
+    ├── __init__.py
+    ├── download_data.py
+    ├── download_raw_data.py
+    └── function.py
 ```
