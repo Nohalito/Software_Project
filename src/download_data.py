@@ -63,6 +63,7 @@ def download_data(annee_debut:int ,annee_fin:int):
         print(f"{i} : {len(df)}")
 
     # remove the csv file if it already exist
+    # Bug when changing year #Need_to_fix
     if os.path.exists(os.path.join(c.PROCESSED_DATA_PATH, c.PER_GAME_DF_FILENAME)):
         os.remove(os.path.join(c.PROCESSED_DATA_PATH, c.PER_GAME_DF_FILENAME))
     # Create the folder if it doesn't exist

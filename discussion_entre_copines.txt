@@ -17,6 +17,7 @@ trucs à faire:
 - streamlit
 - dockerfile
 - .env?
+-"#Need_to_fix" ctrl + f pour trouver nos bug
 
 
 ah oui j'ai caché unlien pornhub au fait (y'en a qu'un seul pour l'instant)
