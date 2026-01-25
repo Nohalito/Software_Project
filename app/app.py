@@ -7,6 +7,9 @@ import streamlit as st
 # Visualization library
 import plotly.express as px
 
+# Syntax
+import re
+
 # Path managment
 import os
 import sys
@@ -43,31 +46,31 @@ df = df.sort_values(["Player", "Year"])
 
 # ----------------------------------------
 # => Sidebar filters :
-# 1°/ Select a player
-# 2°/ Select a year he played
-# 3°/ Select a team he played in (optional)
 # ----------------------------------------
+
 st.sidebar.header("Filter Player")
 
-# 1°/ Search bar + scrolling list :
-# 1st the user tingle with the search bar :
-search_term = st.sidebar.text_input("Search Player")
-
-# 2nd we filter the player list based on the search term
-if search_term:
-    filtered_players = [player for player in df["Player"].unique() if search_term.lower() in player.lower()]
-else:
-    filtered_players = sorted(df["Player"].unique())
-
-# 3rd we show the updated list of player corresponding to the term
+# Filter df on player
 player = st.sidebar.selectbox(
     "Select Player",
-    filtered_players
+    df["Player"].unique()
 )
 
 player_df = df[df["Player"] == player]
 
-# 2°/ Scrolling list for season
+# Manage players that went to multiple team
+regex = r'[0-9]TM'
+multi_team = (
+    player_df.groupby(['Player', 'Year'])['Team']
+      .transform('nunique') > 1
+)
+player_df_evolution = player_df[
+    (multi_team & (player_df['Team'].str.contains(regex))) |
+    (~multi_team)
+].copy()
+player_df_breakdown = player_df[~player_df['Team'].str.contains(regex)]
+
+# Filter sub df on season stats
 season = st.sidebar.selectbox(
     "Select Season",
     player_df["Year"].unique()
@@ -133,7 +136,7 @@ trend_stat = st.selectbox(
 )
 
 fig_trend = px.line(
-    player_df,
+    player_df_evolution,
     x="Year",
     y=trend_stat,
     markers=True,
@@ -154,7 +157,7 @@ cols_to_show = [
 ]
 
 st.dataframe(
-    player_df[cols_to_show].style.format({
+    player_df_breakdown[cols_to_show].style.format({
         "FG%": "{:.3f}",
         "3P%": "{:.3f}",
         "FT%": "{:.3f}",

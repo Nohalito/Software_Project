@@ -52,7 +52,7 @@ def load_data(
         'Year' : 'int64'
     }
 
-    return pd.read_csv(os.path.join( path, filename), dtype=d)
+    return pd.read_csv(os.path.join(path, filename), dtype=d)
 
 #def compute_number_of_frost_days_per_year(df: pd.DataFrame) -> pd.DataFrame:
 #    """Compute the number of frost days per year from the weather DataFrame.
