@@ -29,6 +29,11 @@ if not os.path.exists(c.DATA_DIR):
 # With this treasure I summon
 # Lebron James application
 
+# Design on paper
+# LLM for app template
+# Rewritting all LLM gibberish using : https://docs.streamlit.io/
+# Final touch with big nerdy studying arc
+
 # ----------------------------
 # => Page config
 # ----------------------------
@@ -80,7 +85,7 @@ season_df = player_df[player_df["Year"] == season].iloc[0]
 # ----------------------------
 # => Player Header
 # ----------------------------
-st.subheader(f"{player} — {season}")
+st.subheader(f"{player} - {season}")
 st.caption(
     f"Team: {season_df['Team']} | Position: {season_df['Pos']} | Age: {int(season_df['Age'])}"
 )
@@ -90,11 +95,11 @@ st.caption(
 # ----------------------------
 col1, col2, col3, col4, col5 = st.columns(5)
 
-col1.metric("PTS", f"{season_df['PTS']:.1f}")
-col2.metric("AST", f"{season_df['AST']:.1f}")
-col3.metric("TRB", f"{season_df['TRB']:.1f}")
-col4.metric("MP", f"{season_df['MP']:.1f}")
-col5.metric("G", int(season_df["G"]))
+col1.metric('PTS', f"{season_df['PTS']:.1f}", help = 'Points')
+col2.metric('AST', f"{season_df['AST']:.1f}", help = 'Assists')
+col3.metric('TRB', f"{season_df['TRB']:.1f}", help = 'Total rebound')
+col4.metric('MP', f"{season_df['MP']:.1f}", help = 'Minutes played')
+col5.metric('G', int(season_df['G']), help = 'Games')
 
 # ----------------------------
 # => Shooting Efficiency
@@ -102,7 +107,7 @@ col5.metric("G", int(season_df["G"]))
 st.markdown("### 🎯 Shooting Efficiency")
 
 shooting_df = pd.DataFrame({
-    "Shot Type": ["FG%", "3P%", "2P%", "FT%"],
+    "Shot Type": ["Field Goal %", "3-points field goal %", "2-points field goal %", "Free throws %"],
     "Percentage": [
         season_df["FG%"] * 100,
         season_df["3P%"] * 100,
@@ -119,13 +124,13 @@ fig_shooting = px.bar(
     range_y=[0, 100],
 )
 
-fig_shooting.update_traces(texttemplate="%{text:.1f}%", textposition="outside")
-fig_shooting.update_layout(yaxis_title="%", showlegend=False)
+fig_shooting.update_traces(texttemplate = "%{text:.1f}%", textposition = "outside")
+fig_shooting.update_layout(yaxis_title = "%", showlegend=False)
 
 st.plotly_chart(fig_shooting)
 
 # ----------------------------
-# => Season Trends
+# => Career Trends
 # ----------------------------
 st.markdown("### 📈 Career Trends")
 
@@ -136,15 +141,15 @@ trend_stat = st.selectbox(
 
 fig_trend = px.line(
     player_df_evolution,
-    x="Year",
-    y=trend_stat,
+    x = "Year",
+    y = trend_stat,
     markers=True,
 )
 
 st.plotly_chart(fig_trend)
 
 # ----------------------------
-# => Advanced Stats Table
+# => Season Breakdown
 # ----------------------------
 st.markdown("### 📊 Season Breakdown")
 
@@ -156,11 +161,26 @@ cols_to_show = [
 ]
 
 st.dataframe(
-    player_df_breakdown[cols_to_show].style.format({
-        "FG%": "{:.3f}",
-        "3P%": "{:.3f}",
-        "FT%": "{:.3f}",
-    })
+    player_df_breakdown[cols_to_show]
+    .reset_index(drop = True)
+    .style.format('{:.3f}', subset = cols_to_show[-11:]) # https://pandas.pydata.org/docs/reference/api/pandas.io.formats.style.Styler.format.html
+    #.background_gradient(cmap = 'flag',subset = cols_to_show[-11:]), # https://matplotlib.org/stable/users/explain/colors/colormaps.html
+    .highlight_max(color = 'midnightblue', axis = 0, subset = cols_to_show[-11:]), # https://pandas.pydata.org/docs/reference/style.html
+    
+    # Couldn't find any better way to implement the 'tooltip'
+    column_config = {
+        "G": "Games played",
+        "MP": "Minutes played",
+        "PTS": "Points scored",
+        "AST": "Assists",
+        "TRB": "Total rebounds",
+        "FG%": "Field goal %",
+        "3P%": "3-point field goal %",
+        "FT%": "Free throw %",
+        "STL": "Steals",
+        "BLK": "Blocks",
+        "TOV": "Turnovers"
+    }
 )
 
 # ----------------------------
