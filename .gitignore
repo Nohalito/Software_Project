@@ -2,6 +2,9 @@
 #datasets/processed/*
 datasets/raw/*
 
+# I could have added it to the gitignore... But I'm way too hilarious for that
+#hazard_zone_(test)/*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]

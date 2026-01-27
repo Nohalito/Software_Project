@@ -5,11 +5,10 @@ import numpy as np
 #Repo management
 import os
 import sys
-sys.path.append('..') 
-# sys.path.append('../datasets')
-# sys.path.append('../notebooks')
+sys.path.append('.') 
 
-from Softwares_Project import config as c
+# Configture
+import config as c
 
 
 def download_raw_data():

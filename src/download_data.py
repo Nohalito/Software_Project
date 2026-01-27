@@ -11,11 +11,11 @@ import config as c
 
 def download_data(annee_debut:int ,annee_fin:int):
     """
-    Downloads the basket file from this website: https://www.basketball-reference.com
-    pfiou pfiou dribble dribble pass AND OHHHHHHHH KOBE MADE ANOTHER 3 POINT DAMN
-
-    from now we only store data of player in average per game for years specified in the config file (we store it in the datasets/processed path)
+    This function download all players data in average per game for the 2015-2025 period using this website : https://www.basketball-reference.com
+    Then proceed to save the data in the processed folder.
     """
+    #pfiou pfiou dribble dribble pass AND OHHHHHHHH KOBE MADE ANOTHER 3 POINT DAMN
+    
     df = pd.DataFrame()
     for i in range(annee_debut, annee_fin+1):
 
@@ -51,7 +51,6 @@ def download_data(annee_debut:int ,annee_fin:int):
         for key,values in transfo.items():
             try:
                 df_temp[key] = df_temp[key].fillna(values)
-                #print(f"La colonne {key} a été remplie avec succès.")
             except KeyError:
                 print(f"La colonne {key} n'existe pas sur cette année là.")
 
@@ -69,8 +68,9 @@ def download_data(annee_debut:int ,annee_fin:int):
     # Create the folder if it doesn't exist
     elif os.path.exists(c.PROCESSED_DATA_PATH) is False:
         os.makedirs(c.PROCESSED_DATA_PATH)
-    
-    df.to_csv(os.path.join(c.PROCESSED_DATA_PATH, c.PER_GAME_DF_FILENAME), index = False) #je suis pas sur de celle là j'ai essayé la docu de https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_csv.html
+
+    #je suis pas sur de celle là j'ai essayé la docu de https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_csv.html
+    df.to_csv(os.path.join(c.PROCESSED_DATA_PATH, c.PER_GAME_DF_FILENAME), index = False)
 
 
 if __name__ == "__main__":

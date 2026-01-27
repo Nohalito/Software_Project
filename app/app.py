@@ -28,7 +28,6 @@ if not os.path.exists(c.DATA_DIR):
 # Streamlit is lit
 # With this treasure I summon
 # Lebron James application
-#st.title("NBA Player statistics 🏀")
 
 # ----------------------------
 # => Page config
@@ -59,7 +58,7 @@ player = st.sidebar.selectbox(
 player_df = df[df["Player"] == player]
 
 # Manage players that went to multiple team
-regex = r'[0-9]TM'
+regex = r'[0-9]TM' # iswtg <3 on re
 multi_team = (
     player_df.groupby(['Player', 'Year'])['Team']
       .transform('nunique') > 1
