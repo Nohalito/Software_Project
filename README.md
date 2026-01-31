@@ -8,6 +8,9 @@ Author :
 - **Dennis Yann**
 - **Maffre Camille**
 
+**NBA PLAYER EXPLORER :**
+![App first view](https://github.com/Nohalito/Software_Project/blob/main/app_visual.png?raw=true)
+
 # 1°/ How to Run the App
 
 Here's the guideline that will allow you to use all of our deliverable, notebook & application (We tried to provide a clear guide even though we used the deplorable technology that you despise, window 😱...) :
@@ -21,7 +24,7 @@ No one is spared here, make sure you have **Docker** installed on your computer.
 Clone this repository on your quantic computer :
 
 - `git clone https://github.com/Nohalito/Software_Project.git`
-- `cd Softwares_Project`
+- `cd Software_Project`
 
 ## 1.3°/ Build the Docker Image :
 
