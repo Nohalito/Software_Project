@@ -6,7 +6,7 @@ Made by Boimond Nhoha and Maffre Cacamille
 
 # 1°/ How to use our code :
 
-Here's the guideline that will allow you to use all of our deliverable, notebook & application (We tried to provide a clear guide even though we used the deplorable technology that window is...) :
+Here's the guideline that will allow you to use all of our deliverable, notebook & application (We tried to provide a clear guide even though we used the deplorable technology that you despise, window 😱...) :
 
 - Open any terminal that can allow you to run git
 - Clone this project : `git clone https://github.com/Nohalito/Softwares_Project.git`
@@ -33,7 +33,15 @@ Softwares_Project/
 ├── repo_tree.ipynb
 ├── requirements.txt                    # All python libraries
 ├── app
-│   └── app.py                          # Streamlit app
+│   ├── app.py                          # Streamlit app
+│   ├── assets.py                       # Assets folder
+│   │   ├── img_1.png
+│   │   ├── ...                       
+│   │   └── img_n.jpg
+│   └── pages.py                        # Streamlit app pages
+│       ├── gallery.py
+│       ├── player_comparison.py                       
+│       └── player_stat.py
 ├── datasets
 │   └── processed                       # Dataset folder
 │       └── player_stats_2015-2026.csv
@@ -48,3 +56,15 @@ Softwares_Project/
     ├── download_raw_data.py            # Download raw data function
     └── function.py
 ```
+
+# References : 
+
+List of cool fellow we took inspirations from :
+
+- <a href = "https://streamlit-emoji-shortcodes-streamlit-app-gwckff.streamlit.app/">Emoji list</a>
+- Lot of cool person from <a href = "https://docs.streamlit.io/">Streamlit</a>
+- <a href = ""></a>
+- <a href = ""></a>
+- <a href = ""></a>
+- <a href = "https://www.youtube.com/shorts/PU_zFsvy0Go">Emmanuel Macron</a> 😎
+- <a href = ""></a>
