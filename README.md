@@ -2,7 +2,7 @@ Softwares_Project
 ====================
 
 This is our group project of the Softwares class from our M2 EDS track
-Made by Boimond Nhoha and Maffre Cacamille
+Made by Boimond Nhoha, Dennis Yannn and Maffre Cacamille
 
 # 1°/ How to use our code :
 
