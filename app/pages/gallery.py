@@ -16,9 +16,7 @@ st.set_page_config(
 
 st.title("📸 NBA gallery")
 
-import streamlit as st
-from PIL import Image
-import os
+# CAROUSELLLLLLL MI AMOR
 
 # Load images
 image_dir = "app/assets/"

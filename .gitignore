@@ -1,5 +1,5 @@
 # If datasets too large => uncomment datasets/
-#datasets/processed/*
+datasets/processed/*
 datasets/raw/*
 
 # I could have added it to the gitignore... But I'm way too hilarious for that
