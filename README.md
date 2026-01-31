@@ -40,24 +40,24 @@ This will both download the processed data and 'Expose' the Streamlit app on the
 # 2°/ Topic presentation :
 ## 2.1°/ Topic inspiration :
 
-To choose our topic, we started with the initial idea of analyzing player stat from whatever sport that would have a nice dataset to download.
+To choose our topic, we started with the initial idea of analyzing player stat from whatever sport with an interesting dataset to download.
 
-As such we had the idea like this at first :
+As such we had topics like this :
 
 - <a href = 'https://www.hltv.org/stats/players'>CSGO Player</a>
 - <a href = 'https://www.over.gg/stats'>Overwatch Player</a>
 - <a href = 'https://www.nhl.com/stats/'>NHL Player</a>
 
-All followed similar format, for each season, they would present the player performance over it like winrate, point scored and so on...
+All followed similar format, for each season, they would present the player performance over it with statistic like winrate, point scored and so on...
 
 But what truly made us choose the NBA topic was someone else github : <a href = 'https://github.com/Andy-Pham-72/Web-Scraping-with-BeautifulSoup-and-Pandas/tree/master'>**Andy-Pham-72**</a>.
 While exploring webscrapping tutorial, we encountered his repository, and the target of his repository. The NBA player statistics.
 
 ## 2.1°/ NBA Player stats :
 
-The datasets we extracted came from the season <a href = "https://www.basketball-reference.com/leagues/NBA_2023.html">page (Ex : 2023)</a>, from there, we could find all season official ranking for the top player.
+The datasets we extracted came from the season page <a href = "https://www.basketball-reference.com/leagues/NBA_2023.html">(Ex : 2023)</a>, from there, we could find all season official ranking for the top player.
 
-After extracting 10 years worth of data, our dataset format is the following : 
+After extracting 10 years worth of data, our dataset format was the following : 
 
 |Rank|Player|Games played|...|Lot of different stat|...|Points scored per game|season|
 |---|---|---|---|---|---|---|---|
@@ -74,7 +74,7 @@ After extracting 10 years worth of data, our dataset format is the following :
 Software_Project/
 ├── .gitignore
 ├── Dockerfile                          # Dockerfile to run our project 
-├── README.md                           # Rea. D. Me, the will of **D**ocumentation
+├── README.md                           # Rea. D. Me, the will of Documentation
 ├── config.py                           # Config, contain global variable
 ├── project_M2_software_2025-2026.pdf   # Teacher instruzione
 ├── repo_tree.ipynb
@@ -100,7 +100,6 @@ Software_Project/
 └── src
     ├── __init__.py
     ├── download_data.py                # Download processed data function
-    ├── download_raw_data.py            # Download raw data function
     └── function.py
 ```
 
